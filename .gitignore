@@ -38,5 +38,6 @@ vignettes/*.pdf
 # R Environment Variables
 .Renviron
 
-# session png files
+# session image files
 /*.png
+/*.jpg
