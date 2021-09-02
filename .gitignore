@@ -39,4 +39,4 @@ vignettes/*.pdf
 .Renviron
 
 # session png files
-*.png
+/*.png
