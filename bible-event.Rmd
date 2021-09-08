@@ -1,0 +1,80 @@
+---
+title: "Bible "
+author: "Roger Soh"
+date: "9/3/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r load }
+library("httr")
+library("readxl")
+library(tidyverse)
+library(tidytuesdayR)
+library(lubridate)
+library(scales)
+theme_set(theme_light())
+
+#colorblind6 <-c("#762a83","#af8dc3","#000000","#d9f0d3","#7fbf7b","#1b7837")
+colorblind6 <-c("#762a83","#af8dc3","#e7d4e8","#d9f0d3","#7fbf7b","#1b7837")
+color6 <- c('#a6cee3','#1f78b4','#b2df8a','#33a02c','#fb9a99','#e31a1c')
+```
+
+
+```{r load}
+GET(
+  "https://query.data.world/s/s6sz2sxjk6gxdfwvyywc4b5rdhrpyr",
+  write_disk(tf <- tempfile(fileext = ".xlsx"))
+)
+bible_event <- read_excel(tf)
+
+GET(
+  "https://query.data.world/s/5m3k46uip2c2auolnu6leercxz4ztv",
+  write_disk(tf <- tempfile(fileext = ".xlsx"))
+)
+bible_commandants <- read_excel(tf)
+
+GET("https://query.data.world/s/6rzhzkdmsyd4fhimrns2nyjqkouoih", write_disk(tf <- tempfile(fileext = ".xlsx")))
+bible_persons <- read_excel(tf)
+```
+
+```{r}
+glimpse(bible_commandants)
+
+glimpse(bible_event)
+```
+
+
+```{r wanglar}
+bible_commandants <-
+  bible_commandants %>%
+  mutate(commandment_concept = str_replace(commandment_concept, "G-d", "God"))
+```
+
+```{r}
+df %>% 
+  filter(!is.na(person_id)) %>%
+  filter(person_id == "Abram_1")%>%
+  view()
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
