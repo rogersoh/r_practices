@@ -1,0 +1,90 @@
+---
+title: "Untitled"
+author: "Roger Soh"
+date: "9/13/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(stringr)
+
+theme_set(theme_minimal)
+```
+
+```{r  echo=FALSE}
+pattern= '.*(\\d{3}).*(\\d{3}).*(\\d{4})'
+
+```
+
+```{r}
+phone_numbers = c(
+  "(541) 471 3918.",
+  "(603)281-0308",
+  "Home: 425-707-7220",
+  "814-462-8974",
+  "9704443106",
+  "I don't have a phone."
+)
+```
+
+```{r}
+str_match(phone_numbers, pattern)
+
+str_replace(phone_numbers, pattern, "@\\2#")
+str_replace(phone_numbers, "^(\\d+)", "@\\1#")
+```
+
+```{r}
+letters = c("abc", "abcd", "abcdef", "xyz", "abd42dxy")
+
+str_match(letters, "abc")
+
+str_match(letters, "42")
+
+```
+```{r}
+favorites = c("my favorite is 42","I like 10", "Umm, 33")
+
+str_match(favorites, "\\d+")
+
+```
+
+```{r}
+favorites2 = c("my favorite is 42 or 32","I like 10 and 15", "Umm, 33 and 9")
+
+str_match_all(favorites2, "\\d+")
+```
+
+```{r}
+
+fruits <- c("one apple", "two pears", "three bananas")
+str_replace(fruits, "[aeiou]", "-")
+str_replace_all(fruits, "[aeiou]", "-")
+str_replace_all(fruits, "[aeiou]", toupper)
+str_replace_all(fruits, "b", NA_character_)
+
+str_replace(fruits, "([aeiou])", "")
+str_replace(fruits, "([aeiou])", "\\1\\1")
+str_replace(fruits, "[aeiou]", c("1", "2", "3"))
+str_replace(fruits, c("a", "e", "i"), "-")
+```
+
+The () is captures groups
+```{r}
+captures = "blubasaur flag, photo"
+
+str_match(captures, "(\\w*)\\W*(\\w*)\\W*(\\w*)")
+```
+
+```{r}
+repetitions = c("banana", "papaya", "cancan")
+
+str_match(repetitions, "(na|pa|can){2}")
+
+str_replace(repetitions, "(na|pa|can){2}", "#\\1-")
+```
+
