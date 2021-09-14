@@ -42,13 +42,11 @@ The package `RVest` allows us to:
 Let's start with step one. We use the `read_html` function to call the results URL and grab the HTML response. Store this result as an object.
 
 ```{r}
-document1 <- read_html("https://en.wikipedia.org/wiki/Sola_Aoi")
+document1 <- read_html("https://www.bible.com/bible/111/1CH.1.NIV")
 
 #Let's take a look at the object we just created
 document1
 
-
-document2 <- read_html("https://en.wikipedia.org/wiki/Maria_Ozawa")
 ```
 This is pretty messy. We need to use `RVest` to make this information more usable.
 
@@ -70,20 +68,13 @@ What does the example below do?
 html_nodes(document1, "a")
 ```
 
-That's a lot of results! Many elements on a page will have the same HTML tag. For instance, if you search for everything with the `a` tag, you're likely to get a lot of stuff, much of which you don't want. 
-
-In our case, we only want the links corresponding to the speaker Dwight D. Eisenhower.
-
-```{r echo = F}
-knitr::include_graphics(path = "img/scraping-links.png")
-```
 
 Using selector gadget, we found out that the CSS selector for document's speaker is `.diet-title a`.
 
 We can then modify our argument in `html_nodes` to look for this more specific CSS selector. 
 
 ```{r}
-html_nodes(document1, ".content")
+html_nodes(document1, ".verse span") 
 ```
 
 ### Get Attributes and Text of Elements
@@ -96,118 +87,57 @@ Once we identify elements, we want to access information in that element. Oftent
 Getting the text inside an element is pretty straightforward. We can use the `html_text()` command  inside of `RVest` to get the text of an element:
 
 ```{r}
-artress <- html_nodes(document2, "#firstHeading") %>%
-  html_text()
-
-
-title <- html_nodes(document2, ".wikitable~ h3+ .wikitable td:nth-child(1)") %>% 
+html_nodes(document1, ".verse span") %>%
   html_text() #select text of element
 
-title
-
-company <- html_nodes(document2, ".wikitable~ h3+ .wikitable td:nth-child(2)") %>% 
-  html_text() #select text of element
-
-company
-
-
-director <- html_nodes(document2, ".wikitable~ h3+ .wikitable td:nth-child(3)") %>% 
-  html_text() #select text of element
-
-director
-
-release_date <- html_nodes(document2, ".wikitable~ h3+ .wikitable td:nth-child(4)") %>% 
-  html_text() #select text of element
-
-release_date
-
-note <- html_nodes(document2, ".wikitable~ h3+ .wikitable td:nth-child(5)") %>% 
-  html_text() #select text of element
-
-note
-
-
-
-
-
-
-
-df2 <- tibble(
-  title, company, director, release_date, note)
-
-df2 <- df2 %>%
-  mutate(artress = artress)
-
-df_tidy2 <- df2 %>%
-  mutate(release_date =as_date( ifelse(is.na(mdy(release_date)),dmy(release_date),mdy(release_date))))
-
-
-
-# verse <-verse_collapse %>% 
-#   str_replace_all("[0-9]+", "@") %>%
-#   as_tibble() %>%
-#   separate_rows(value, sep = "@")
-```
-
-
-You can access a tag's attributes using `html_attr`. For example, we often want to get a URL from an `a` (link) element. This is the URL is the link "points" to. It's contained in the attribute `href`:
-
-
-
-
-
-```{r}
-speaker_link <- html_nodes(document1, ".diet-title a") %>% 
-  html_attr("href")
-
-speaker_link
-```
-
-### Let's DO this.
-
-Believe it or not, that's all you need to scrape a website. Let's apply these skills to scrape a sample document from the UCSB website -- the [first item in our search results]("http://www.presidency.ucsb.edu/documents/letter-t-keith-glennan-administrator-national-aeronautics-and-space-administration"). 
-
-We'll collect the document's date, speaker, title, and full text.
-
-1. Date
-
-```{r, message=FALSE}
-document1 <- read_html("https://www.presidency.ucsb.edu/documents/special-message-the-congress-relative-space-science-and-exploration")
-
-date <- html_nodes(document1, ".date-display-single") %>%
-  html_text() %>% # grab element text
-  mdy() #format using lubridate
-date
-```
-
-2. Speaker
-
-```{r, message=FALSE}
-#Speaker
-speaker <- html_nodes(document1, ".diet-title a") %>%
-  html_text()
-speaker
-```
-
-3. Title
-
-```{r, message=FALSE}
-#Title
-title <- html_nodes(document1, "h1") %>%
-  html_text()
-title
 ```
 
 4. Text
 
 ```{r, message=FALSE}
 #Text
-text <- html_nodes(document1, "div.field-docs-content") %>%
-          html_text()
+book_chapter <- html_nodes(document1, "h1") %>%
+  html_text()
+
+
+html_nodes(document1, ".verse span") %>%
+  html_text() %>%
+  str_replace("(^\\d+)", "@\\1&") %>%
+  str_replace("@(\\d+)&:", "\\1:")
+
 
 #this is a long document, so let's just display the first 1000 characters
 text %>% substr(1, 1000) 
 ```
+
+```{r}
+fruits <- c("1 Adam, Seth, Enosh,  2 Kenan, Mahalalel, Jared,  36 Enoch, Methuselah, Lamech, Noah.    4 The sons of Noah: #1:4 Septuagint; Hebrew does not have this line. # 1:4 Septuagint; Hebrew does not have this line. 1:4  Septuagint; Hebrew does not have this line. 5 Shem, Ham and Japheth. ")
+str_view_all(fruits, "\\s(?=(\\d+ ))")
+text <- str_replace_all(fruits, "\\s(?=(\\d ))", "@") %>%
+  str_split("@") 
+
+text
+
+str_view(text, " ")
+
+str_replace(fruits, "\\s", "#")
+
+str_view_all(fruits, "(?<=(\\d+ ))")
+str_view_all(fruits, "\\d+")
+
+
+(?<=\\d+) 
+str_replace_all(fruits, "$`([0-9]+)", "\\`@")
+
+str_replace_all(fruits, "[aeiou]", toupper)
+str_replace_all(fruits, "b", NA_character_)
+
+str_replace(fruits, "([aeiou])", "")
+str_replace(fruits, "([aeiou])", "\\1\\2")
+str_replace(fruits, "[aeiou]", c("1", "2", "3"))
+str_replace(fruits, c("a", "e", "i"), "-")
+```
+
 
 ### Challenge 1: Make a function
 
