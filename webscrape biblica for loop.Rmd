@@ -1,0 +1,129 @@
+---
+title: "Biblica Bible webscraping"
+author: "Roger Soh"
+date: "2021"
+output:
+  html_document: default
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+## Scraping Biblica Bible
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(rvest)
+library(stringr)
+library(purrr)
+library(knitr)
+library(lubridate)
+```
+
+Biblica.com 
+
+```{r}
+bibletext <- data.frame(matrix(ncol= 4, nrow =0))
+colnames(bibletext) <- c("book","chapter", "verse", "text")
+
+bibletext <- read.csv("./data/bible/bibletext.csv") %>%
+  select(-1)
+```
+
+
+```{r scraping}
+for(i in 31:34) {
+  url <- str_c("https://www.biblica.com/bible/niv/deuteronomy/", i, "/")
+  
+  biblica_webscrap <- read_html(url)
+  
+  book_chapter <- html_nodes(biblica_webscrap, "h1") %>%
+    html_text() %>% #select text of element
+    str_replace("\\s[:punct:]\\sNew International Version \\(NIV\\)" , "")
+  
+  verse_text <- html_nodes(biblica_webscrap, ".verse-span") %>%
+    html_text() %>%
+    str_replace("(^\\d)(?!\\d)", "@\\1&") %>%
+    str_replace("(^\\d\\d)(?!(\\,|\\d))", "@\\1&") %>%
+    str_flatten(collapse = " ") %>%
+    str_split("@")
+  
+  book_verse <- data.frame(book_chapter, verse_text) %>%
+    as_tibble()
+  
+  colnames(book_verse) <- c("book_chap", "verse_text")
+  
+  book_verse <- book_verse %>%
+    filter(verse_text != "")
+  
+  tmp_bibletext <- book_verse %>%
+    separate(book_chap, c("book", "chapter")) %>%
+    separate(verse_text, c("verse", "text"), "& ")
+  
+  bibletext <- rbind(bibletext, tmp_bibletext)
+  
+  Sys.sleep(5)
+}
+
+
+```
+
+```{r}
+
+bibletext <- bibletext %>%
+  filter(!is.na(text))
+
+```
+
+
+
+```{r save csv}
+write.csv(bibletext, "./data/bible/bibletext.csv")
+
+```
+
+
+
+{r NUMBER 33}
+i = 33
+url <- str_c("https://www.biblica.com/bible/niv/numbers/", i, "/")
+
+biblica_webscrap <- read_html(url)
+
+book_chapter <- html_nodes(biblica_webscrap, "h1") %>%
+  html_text() %>% #select text of element
+  str_replace("\\s[:punct:]\\sNew International Version \\(NIV\\)" , "")
+
+verse_text <- html_nodes(biblica_webscrap, ".pi1 , .p") %>%
+  html_text() %>%
+  str_replace_all("(^\\d)(?=[a-zA-Z])", "@\\1& ") %>%
+  str_replace_all("(^\\d\\d)(?=[a-zA-Z])", "@\\1& ") %>%
+  str_replace_all('\\s(\\d+)(?=[a-zA-Z])', " @\\1& ") %>%
+  str_replace_all('(\\d+)“', ' @\\1& \"') 
+
+```
+
+{r}
+verse_text <- verse_text %>%
+  str_flatten(collapse = " ") %>%
+  str_split("@")
+
+book_verse <- data.frame(book_chapter, verse_text) %>%
+  as_tibble()
+
+colnames(book_verse) <- c("book_chap", "verse_text")
+
+book_verse <- book_verse %>%
+  filter(verse_text != "")
+
+tmp_bibletext <- book_verse %>%
+  separate(book_chap, c("book", "chapter")) %>%
+  separate(verse_text, c("verse", "text"), "& ")
+
+bibletext <- rbind(bibletext, tmp_bibletext)
+```
+
+
+
+
+

@@ -101,12 +101,44 @@ This involves:
 - Returning this list.
 
 ```{r eval = F}
-scrape_docs <- function(URL){
+scrape_docs <- function(URL) {
 
-  # YOUR CODE HERE
+  biblica_webscrap <- read_html(URL)
+  
+  book_chapter <- html_nodes(biblica_webscrap, "h1") %>%
+    html_text() %>% #select text of element
+    str_replace("\\s[:punct:]\\sNew International Version \\(NIV\\)" , "")
+  
+  book_chapter
+  
+  verse_text <- html_nodes(biblica_webscrap, ".verse-span") %>%
+    html_text() %>%
+    str_replace("(^\\d+)", "@\\1&") %>%
+    str_flatten(collapse = " ") %>%
+    str_split("@")
+  
+  book_verse <- data.frame(book_chapter, verse_text) %>%
+    as_tibble()
+  
+  colnames(book_verse) <- c("book_chap", "verse_text")
+  
+  book_verse <- book_verse %>%
+    filter(verse_text != "")
+  
+  tmp_bibletext <- book_verse %>%
+    separate(book_chap, c("book", "chapter")) %>%
+    separate(verse_text, c("verse", "text"), "& ")
+  
+  bibletext <- rbind(bibletext, tmp_bibletext)
+  
+  bibletext %>%
+    tail(2)
   
 }
 
+
 # uncomment to test
-# scrape_doc("https://www.presidency.ucsb.edu/documents/letter-t-keith-glennan-administrator-national-aeronautics-and-space-administration")
+scrape_docs(
+  "https://www.biblica.com/bible/niv/leviticus/1/"
+)
 ```
