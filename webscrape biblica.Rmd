@@ -9,18 +9,7 @@ editor_options:
   chunk_output_type: console
 ---
 
-## Scraping Presidential Statements
-
-To demonstrate webscraping in R, we're going to collect records on presidential statements here: https://www.presidency.ucsb.edu/
-
-Let's say we're interested in how presidents speak about "space exploration". On the website, we punch in this search term, and we get the [following 346 results](https://www.presidency.ucsb.edu/advanced-search?field-keywords=%22space+exploration%22&field-keywords2=&field-keywords3=&from%5Bdate%5D=&to%5Bdate%5D=&person2=&items_per_page=100). 
-
-Our goal is to scrape these records, and store pertinent information in a dataframe. We will be doing this in two steps:
-
-1. Write a function to scrape each individual record page (these notes).
-2. Use this function to loop through all results, and collect all pages (homework).
-
-Load the following packages to get started:
+## Scraping Biblica Bible
 
 ```{r warning=FALSE, message=FALSE}
 library(tidyverse)
@@ -33,39 +22,26 @@ library(lubridate)
 
 Biblica.com 
 
-```{r biblica.com}
-biblica_webscrap <- read_html("https://www.biblica.com/bible/niv/genesis/1/")
-
-#Let's take a look at the object we just created
-biblica_webscrap
-```
-
 ```{r}
 bibletext <- data.frame(matrix(ncol= 4, nrow =0))
 colnames(bibletext) <- c("book","chapter", "verse", "text")
-```
 
-Webscrape
-
-```{r}
-biblica_webscrap <- read_html("https://www.biblica.com/bible/niv/genesis/1/")
+bibletext <- read.csv("./data/bible/bibletext.csv") %>%
+  select(-1)
 ```
 
 
-```{r book chapter}
 
+```{r scraping}
+url <- c("https://www.biblica.com/bible/niv/exodus/25/")
+
+biblica_webscrap <- read_html(url)
 
 book_chapter <- html_nodes(biblica_webscrap, "h1") %>%
   html_text() %>% #select text of element
   str_replace("\\s[:punct:]\\sNew International Version \\(NIV\\)" , "")
 
-```
-
-
-
-```{r, text}
-#Text
-
+book_chapter
 
 verse_text <- html_nodes(biblica_webscrap, ".verse-span") %>%
   html_text() %>%
@@ -81,17 +57,31 @@ colnames(book_verse) <- c("book_chap", "verse_text")
 book_verse <- book_verse %>%
   filter(verse_text != "")
 
+tmp_bibletext <- book_verse %>%
+  separate(book_chap, c("book", "chapter")) %>%
+  separate(verse_text, c("verse", "text"), "& ")
+
+bibletext <- rbind(bibletext, tmp_bibletext)
+
+bibletext %>%
+  tail(2)
 ```
+
+```{r save csv}
+write.csv(bibletext, "./data/bible/bibletext.csv")
+
+
+```
+
 
 ```{r}
-# Spread and gather are complements
-df <- data.frame(x = c("a", "b"), y = c(3, 4), z = c(5, 6))
-df
-df %>% spread(x, y) %>% gather("x", "y", a:b, na.rm = TRUE)
+# Extract by name or position
+# .default specifies value for elements that are missing or NULL
+l1 <- list(list(a = 1L), list(a = NULL, b = 2L), list(b = 3L))
+l1 %>% map("a", .default = "???")
+l1 %>% map_int("b", .default = NA)
+l1 %>% map_int(2, .default = NA)
 ```
-
-
-
 
 
 
