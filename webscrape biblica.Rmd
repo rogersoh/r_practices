@@ -31,87 +31,6 @@ library(knitr)
 library(lubridate)
 ```
 
-### Using `RVest` to Read HTML
-
-The package `RVest` allows us to:
-
-1. Collect the HTML source code of a webpage
-2. Read the HTML of the page
-3. Select and keep certain elements of the page that are of interest
-
-Let's start with step one. We use the `read_html` function to call the results URL and grab the HTML response. Store this result as an object.
-
-```{r}
-document1 <- read_html("https://www.bible.com/bible/111/1CH.1.NIV")
-
-#Let's take a look at the object we just created
-document1
-
-```
-This is pretty messy. We need to use `RVest` to make this information more usable.
-
-### Find Page Elements
-
-`RVest` has a number of functions to find information on a page. Like other webscraping tools, RVest lets you find elements by their:
-
-1. HTML tags
-2. HTML Attributes
-3. CSS Selectors
-
-Let's search first for HTML tags.
-
-The function `html_nodes` searches a parsed HTML object to find all the elements with a particular HTML tag, and returns all of those elements.
-
-What does the example below do?
-
-```{r}
-html_nodes(document1, "a")
-```
-
-
-Using selector gadget, we found out that the CSS selector for document's speaker is `.diet-title a`.
-
-We can then modify our argument in `html_nodes` to look for this more specific CSS selector. 
-
-```{r}
-html_nodes(document1, ".verse span") 
-```
-
-### Get Attributes and Text of Elements
-
-Once we identify elements, we want to access information in that element. Oftentimes this means two things:
-
-1) Text
-2) Attributes
-
-Getting the text inside an element is pretty straightforward. We can use the `html_text()` command  inside of `RVest` to get the text of an element:
-
-```{r}
-html_nodes(document1, ".verse span") %>%
-  html_text() #select text of element
-
-```
-
-4. Text
-
-```{r, message=FALSE}
-#Text
-book_chapter <- html_nodes(document1, "h1") %>%
-  html_text()
-
-
-html_nodes(document1, ".verse span") %>%
-  html_text() %>%
-  str_replace("(^\\d+)", "@\\1&") %>%
-  str_replace("@(\\d+)&:", "\\1:")
-
-
-#this is a long document, so let's just display the first 1000 characters
-text %>% substr(1, 1000) 
-```
-
-``
-
 Biblica.com 
 
 ```{r biblica.com}
@@ -119,18 +38,30 @@ biblica_webscrap <- read_html("https://www.biblica.com/bible/niv/genesis/1/")
 
 #Let's take a look at the object we just created
 biblica_webscrap
+```
 
+```{r}
+bibletext <- data.frame(matrix(ncol= 4, nrow =0))
+colnames(bibletext) <- c("book","chapter", "verse", "text")
+```
+
+Webscrape
+
+```{r}
+biblica_webscrap <- read_html("https://www.biblica.com/bible/niv/genesis/1/")
 ```
 
 
 ```{r book chapter}
+
+
 book_chapter <- html_nodes(biblica_webscrap, "h1") %>%
   html_text() %>% #select text of element
   str_replace("\\s[:punct:]\\sNew International Version \\(NIV\\)" , "")
 
 ```
 
-4. Text
+
 
 ```{r, text}
 #Text
@@ -150,10 +81,6 @@ colnames(book_verse) <- c("book_chap", "verse_text")
 book_verse <- book_verse %>%
   filter(verse_text != "")
 
-
-
-#this is a long document, so let's just display the first 1000 characters
-text %>% substr(1, 1000) 
 ```
 
 ```{r}
