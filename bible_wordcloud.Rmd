@@ -1,0 +1,53 @@
+---
+title: "Bible word cloud"
+author: "Roger Soh"
+date: "2021"
+output:
+  html_document: default
+  pdf_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+## Scraping Biblica Bible
+
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(rvest)
+library(stringr)
+library(purrr)
+library(knitr)
+library(lubridate)
+library(tm)
+```
+
+
+```{r}
+bibletext <- read.csv("./data/bible/bibletext.csv") %>%
+  select(-1)
+```
+
+```{r}
+bookselect <- c("1 Samuel", "2 Samuel")
+bible_cloud <- bibletext %>%
+  filter(book %in% bookselect) 
+  
+bible_cloud <- Corpus(VectorSource(bible_cloud$text))
+
+bible_clean_corpus <- tm_map(bible_cloud, tolower)
+bible_clean_corpus <- tm_map(bible_clean_corpus, removeNumbers)
+bible_clean_corpus <- tm_map(bible_clean_corpus, removePunctuation)
+bible_clean_corpus <- tm_map(bible_clean_corpus, stripWhitespace)
+bible_clean_corpus <- tm_map(bible_clean_corpus, removeWords, stopwords())
+
+inspect(bible_clean_corpus[100:120])
+
+```
+
+```{r}
+
+library(wordcloud)
+
+wordcloud(bible_clean_corpus, min.freq = 10, colors = brewer.pal(8, "Accent"), random.order = F)
+```
+

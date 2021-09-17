@@ -32,8 +32,8 @@ bibletext <- read.csv("./data/bible/bibletext.csv") %>%
 
 
 ```{r scraping}
-for(i in 1:31) {
-  url <- str_c("https://www.biblica.com/bible/niv/1-samuel/", i, "/")
+for(i in 1:24) {
+  url <- str_c("https://www.biblica.com/bible/niv/2-samuel/", i, "/")
   
   biblica_webscrap <- read_html(url)
   
