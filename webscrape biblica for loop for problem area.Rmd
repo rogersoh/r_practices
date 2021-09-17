@@ -32,19 +32,21 @@ bibletext <- read.csv("./data/bible/bibletext.csv") %>%
 
 
 ```{r scraping}
-for(i in 6:6) {
-  url <- str_c("https://www.biblica.com/bible/niv/exodus/", i, "/")
+for(i in 1:31) {
+  url <- str_c("https://www.biblica.com/bible/niv/1-samuel/", i, "/")
   
   biblica_webscrap <- read_html(url)
   
   book_chapter <- html_nodes(biblica_webscrap, "h1") %>%
     html_text() %>% #select text of element
     str_replace("\\s[:punct:]\\sNew International Version \\(NIV\\)" , "")
+  #  str_replace("(^\\d)\\s","\\1-" )
+
   
-  verse_text <- html_nodes(biblica_webscrap, ".verse-span") %>%
+  verse_text <- html_nodes(biblica_webscrap, ".content") %>%
     html_text() %>%
-    str_replace("(^\\d)(?!\\d)", "@\\1&") %>%
-    str_replace("(^\\d\\d)(?!(\\,|\\d))", "@\\1&") %>%
+    str_replace_all("(\\d+)(?=[a-zA-Z])", "@\\1& ") %>%
+    str_replace_all('(\\d+)“', ' @\\1& \"') %>%
     str_flatten(collapse = " ") %>%
     str_split("@")
   
@@ -57,8 +59,9 @@ for(i in 6:6) {
     filter(verse_text != "")
   
   tmp_bibletext <- book_verse %>%
-    separate(book_chap, c("book", "chapter")) %>%
+    separate(book_chap, c("book", "chapter"), sep = "\\s(?=\\d)") %>%
     separate(verse_text, c("verse", "text"), "& ")
+  
   
   bibletext <- rbind(bibletext, tmp_bibletext)
   
@@ -107,10 +110,8 @@ verse_text <- html_nodes(biblica_webscrap, ".pi1 , .verse-span") %>%
 
 
 ```{r}
-verse_text <- html_nodes(biblica_webscrap, ".content") %>%
-  html_text() %>%
-  str_replace_all("(\\d+)(?=[a-zA-Z])", "@\\1& ") %>%
-  str_replace_all('(\\d+)“', ' @\\1& \"')
+
+
 ```
 
 
