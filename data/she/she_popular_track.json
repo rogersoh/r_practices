@@ -1,0 +1,764 @@
+{
+  "tracks": [
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/0OUotK9GbRDrKIWQ5lmEu1"
+        },
+        "href": "https://api.spotify.com/v1/albums/0OUotK9GbRDrKIWQ5lmEu1",
+        "id": "0OUotK9GbRDrKIWQ5lmEu1",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273bf20604ae28256705ee864c2",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02bf20604ae28256705ee864c2",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851bf20604ae28256705ee864c2",
+            "width": 64
+          }
+        ],
+        "name": "我的電臺FM S.H.E",
+        "release_date": "2008-09-23",
+        "release_date_precision": "day",
+        "total_tracks": 11,
+        "type": "album",
+        "uri": "spotify:album:0OUotK9GbRDrKIWQ5lmEu1"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 271280,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWD950806109"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/2KRLVQOjVL1SDxcHXUAC4E"
+      },
+      "href": "https://api.spotify.com/v1/tracks/2KRLVQOjVL1SDxcHXUAC4E",
+      "id": "2KRLVQOjVL1SDxcHXUAC4E",
+      "is_local": false,
+      "is_playable": true,
+      "name": "安靜了",
+      "popularity": 46,
+      "preview_url": "https://p.scdn.co/mp3-preview/7ecf5a3686ff5ba4131799c89f2743c41c3a5339?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 7,
+      "type": "track",
+      "uri": "spotify:track:2KRLVQOjVL1SDxcHXUAC4E"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/0WMB0BgnPWkU6d5pSY4pRS"
+        },
+        "href": "https://api.spotify.com/v1/albums/0WMB0BgnPWkU6d5pSY4pRS",
+        "id": "0WMB0BgnPWkU6d5pSY4pRS",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273f5df00ba244ff1c150e77233",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02f5df00ba244ff1c150e77233",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851f5df00ba244ff1c150e77233",
+            "width": 64
+          }
+        ],
+        "name": "你曾是少年",
+        "release_date": "2015-05-25",
+        "release_date_precision": "day",
+        "total_tracks": 1,
+        "type": "album",
+        "uri": "spotify:album:0WMB0BgnPWkU6d5pSY4pRS"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 266651,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWD951506101"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/2vEPmW5BnsnXNVV29laPsu"
+      },
+      "href": "https://api.spotify.com/v1/tracks/2vEPmW5BnsnXNVV29laPsu",
+      "id": "2vEPmW5BnsnXNVV29laPsu",
+      "is_local": false,
+      "is_playable": true,
+      "name": "你曾是少年",
+      "popularity": 46,
+      "preview_url": "https://p.scdn.co/mp3-preview/ffaed150e94e6641dff9afaee0e1d1d89ff6c8cc?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:2vEPmW5BnsnXNVV29laPsu"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/4vybZhjpVc5L6cJBzczY3b"
+        },
+        "href": "https://api.spotify.com/v1/albums/4vybZhjpVc5L6cJBzczY3b",
+        "id": "4vybZhjpVc5L6cJBzczY3b",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273797df4db6e4ece28ef31dd56",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02797df4db6e4ece28ef31dd56",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851797df4db6e4ece28ef31dd56",
+            "width": 64
+          }
+        ],
+        "name": "十七",
+        "release_date": "2018-08-30",
+        "release_date_precision": "day",
+        "total_tracks": 1,
+        "type": "album",
+        "uri": "spotify:album:4vybZhjpVc5L6cJBzczY3b"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 308693,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWD951806101"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/2qkJkRmcgpdVhdEhz3GcFX"
+      },
+      "href": "https://api.spotify.com/v1/tracks/2qkJkRmcgpdVhdEhz3GcFX",
+      "id": "2qkJkRmcgpdVhdEhz3GcFX",
+      "is_local": false,
+      "is_playable": true,
+      "name": "十七",
+      "popularity": 44,
+      "preview_url": "https://p.scdn.co/mp3-preview/59c43f4dbc106e8cec7d783c2aff8813f11cc326?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:2qkJkRmcgpdVhdEhz3GcFX"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/5O0DopNZFNbsZHsj6qFKts"
+        },
+        "href": "https://api.spotify.com/v1/albums/5O0DopNZFNbsZHsj6qFKts",
+        "id": "5O0DopNZFNbsZHsj6qFKts",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27344b684ff3103419fa505d3aa",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0244b684ff3103419fa505d3aa",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485144b684ff3103419fa505d3aa",
+            "width": 64
+          }
+        ],
+        "name": "不想长大",
+        "release_date": "2005-11-25",
+        "release_date_precision": "day",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:5O0DopNZFNbsZHsj6qFKts"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 243346,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWD950506204"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/7rkRDQj2ASyqEMWVASQGZQ"
+      },
+      "href": "https://api.spotify.com/v1/tracks/7rkRDQj2ASyqEMWVASQGZQ",
+      "id": "7rkRDQj2ASyqEMWVASQGZQ",
+      "is_local": false,
+      "is_playable": true,
+      "name": "天灰",
+      "popularity": 44,
+      "preview_url": "https://p.scdn.co/mp3-preview/f063d9be44aea712f51055ea6a5fba497735ec11?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 4,
+      "type": "track",
+      "uri": "spotify:track:7rkRDQj2ASyqEMWVASQGZQ"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/6yMc40gD9MLiNxFljwdenN"
+        },
+        "href": "https://api.spotify.com/v1/albums/6yMc40gD9MLiNxFljwdenN",
+        "id": "6yMc40gD9MLiNxFljwdenN",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273a1d1b65db1f1c4fc1d746859",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02a1d1b65db1f1c4fc1d746859",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851a1d1b65db1f1c4fc1d746859",
+            "width": 64
+          }
+        ],
+        "name": "Forever 新歌 + 精选",
+        "release_date": "2006",
+        "release_date_precision": "year",
+        "total_tracks": 17,
+        "type": "album",
+        "uri": "spotify:album:6yMc40gD9MLiNxFljwdenN"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 228653,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWD950606102"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/676Wf5wT21lLkGm1XUbKNE"
+      },
+      "href": "https://api.spotify.com/v1/tracks/676Wf5wT21lLkGm1XUbKNE",
+      "id": "676Wf5wT21lLkGm1XUbKNE",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Ring Ring Ring",
+      "popularity": 43,
+      "preview_url": "https://p.scdn.co/mp3-preview/8d60e7c87bdd6904d5be9839b6993e60176f2b38?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 2,
+      "type": "track",
+      "uri": "spotify:track:676Wf5wT21lLkGm1XUbKNE"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/0MDu8tWIgFWgriPq5NrLoE"
+        },
+        "href": "https://api.spotify.com/v1/albums/0MDu8tWIgFWgriPq5NrLoE",
+        "id": "0MDu8tWIgFWgriPq5NrLoE",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273a24c2d4b92b8144aeebc9005",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02a24c2d4b92b8144aeebc9005",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851a24c2d4b92b8144aeebc9005",
+            "width": 64
+          }
+        ],
+        "name": "女生宿舍",
+        "release_date": "2001-09-11",
+        "release_date_precision": "day",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:0MDu8tWIgFWgriPq5NrLoE"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 276760,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWC310106101"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/1R4nUHJeX005LSpuRakYBD"
+      },
+      "href": "https://api.spotify.com/v1/tracks/1R4nUHJeX005LSpuRakYBD",
+      "id": "1R4nUHJeX005LSpuRakYBD",
+      "is_local": false,
+      "is_playable": true,
+      "name": "恋人未满",
+      "popularity": 42,
+      "preview_url": "https://p.scdn.co/mp3-preview/2f0f533705c4b7b15d0c51aefe57ade5500f7d2e?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:1R4nUHJeX005LSpuRakYBD"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/2Ct96tdzvZzNwsC6shl9tG"
+        },
+        "href": "https://api.spotify.com/v1/albums/2Ct96tdzvZzNwsC6shl9tG",
+        "id": "2Ct96tdzvZzNwsC6shl9tG",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2731d729e7a16f7ba77342fbbfa",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e021d729e7a16f7ba77342fbbfa",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048511d729e7a16f7ba77342fbbfa",
+            "width": 64
+          }
+        ],
+        "name": "SHERO",
+        "release_date": "2010-03-26",
+        "release_date_precision": "day",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:2Ct96tdzvZzNwsC6shl9tG"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 241040,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWD951006108"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/4hcNpo1rtbzyNswsM5byTf"
+      },
+      "href": "https://api.spotify.com/v1/tracks/4hcNpo1rtbzyNswsM5byTf",
+      "id": "4hcNpo1rtbzyNswsM5byTf",
+      "is_local": false,
+      "is_playable": true,
+      "name": "爱上你",
+      "popularity": 42,
+      "preview_url": "https://p.scdn.co/mp3-preview/4f66d65fe0b749806a38f64aaceeca7a76a4d809?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 8,
+      "type": "track",
+      "uri": "spotify:track:4hcNpo1rtbzyNswsM5byTf"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/4uMVflZUfB7pWhiPLBtOJT"
+        },
+        "href": "https://api.spotify.com/v1/albums/4uMVflZUfB7pWhiPLBtOJT",
+        "id": "4uMVflZUfB7pWhiPLBtOJT",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273ad5ea7cc855e19ee0ece069c",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02ad5ea7cc855e19ee0ece069c",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851ad5ea7cc855e19ee0ece069c",
+            "width": 64
+          }
+        ],
+        "name": "青春株式会社",
+        "release_date": "2002",
+        "release_date_precision": "year",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:4uMVflZUfB7pWhiPLBtOJT"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 281000,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWC950206105"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/3GR2MyhdGvHnpSNJffuacz"
+      },
+      "href": "https://api.spotify.com/v1/tracks/3GR2MyhdGvHnpSNJffuacz",
+      "id": "3GR2MyhdGvHnpSNJffuacz",
+      "is_local": false,
+      "is_playable": true,
+      "name": "热带雨林",
+      "popularity": 42,
+      "preview_url": "https://p.scdn.co/mp3-preview/83b5fc18945330266a78212d5221ad21534a25b2?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 5,
+      "type": "track",
+      "uri": "spotify:track:3GR2MyhdGvHnpSNJffuacz"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/75O6sX2Gi4xUvLoCp2RZ8k"
+        },
+        "href": "https://api.spotify.com/v1/albums/75O6sX2Gi4xUvLoCp2RZ8k",
+        "id": "75O6sX2Gi4xUvLoCp2RZ8k",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273e8521a0b7113d042f010781f",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02e8521a0b7113d042f010781f",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851e8521a0b7113d042f010781f",
+            "width": 64
+          }
+        ],
+        "name": "Super Star",
+        "release_date": "2003-08-22",
+        "release_date_precision": "day",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:75O6sX2Gi4xUvLoCp2RZ8k"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 196466,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWD950306201"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/1vMqI4JCpK79qjKcszunq8"
+      },
+      "href": "https://api.spotify.com/v1/tracks/1vMqI4JCpK79qjKcszunq8",
+      "id": "1vMqI4JCpK79qjKcszunq8",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Super Star",
+      "popularity": 40,
+      "preview_url": "https://p.scdn.co/mp3-preview/7604cb6edf092d51b5b634557f34e91ab54ff170?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:1vMqI4JCpK79qjKcszunq8"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+            },
+            "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+            "id": "2lWShxOL8iTlI0pmtVKvEh",
+            "name": "S.H.E",
+            "type": "artist",
+            "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/6yMc40gD9MLiNxFljwdenN"
+        },
+        "href": "https://api.spotify.com/v1/albums/6yMc40gD9MLiNxFljwdenN",
+        "id": "6yMc40gD9MLiNxFljwdenN",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273a1d1b65db1f1c4fc1d746859",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02a1d1b65db1f1c4fc1d746859",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851a1d1b65db1f1c4fc1d746859",
+            "width": 64
+          }
+        ],
+        "name": "Forever 新歌 + 精选",
+        "release_date": "2006",
+        "release_date_precision": "year",
+        "total_tracks": 17,
+        "type": "album",
+        "uri": "spotify:album:6yMc40gD9MLiNxFljwdenN"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2lWShxOL8iTlI0pmtVKvEh"
+          },
+          "href": "https://api.spotify.com/v1/artists/2lWShxOL8iTlI0pmtVKvEh",
+          "id": "2lWShxOL8iTlI0pmtVKvEh",
+          "name": "S.H.E",
+          "type": "artist",
+          "uri": "spotify:artist:2lWShxOL8iTlI0pmtVKvEh"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 261506,
+      "explicit": false,
+      "external_ids": {
+        "isrc": "TWD950606101"
+      },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/17IidG1HMhzJ7hee4uOikv"
+      },
+      "href": "https://api.spotify.com/v1/tracks/17IidG1HMhzJ7hee4uOikv",
+      "id": "17IidG1HMhzJ7hee4uOikv",
+      "is_local": false,
+      "is_playable": true,
+      "name": "触电",
+      "popularity": 39,
+      "preview_url": "https://p.scdn.co/mp3-preview/afdd501c6e2af4f4a5c91108825a7793cbd408a4?cid=774b29d4f13844c495f206cafdad9c86",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:17IidG1HMhzJ7hee4uOikv"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+---
+title: "pmo speeches"
+author: "Roger Soh"
+date: "9/19/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+
+```
+
+```{r}
+url <- c("https://www.pmo.gov.sg")
+
+pmo_speeches_link <- read_html(str_c(url, "Newsroom", "?page=2&keywords=&from=&topic=&year=&type="))
+
+href <- html_elements(pmo_speeches_link, ".snippet-content a") %>%
+    html_attr("href")
+
+for(i in href){
+  str_c(url, href)
+}
+
+
+speeches_link <- function(x){
+  str_c(url, x)
+}
+
+speeches_link("")
+
+href %>%
+  map(function(href)
+    speeches_link(href))
+```
+
+```{r}
+speech <- read_html("https://www.pmo.gov.sg/Newsroom/National-Day-Rally-2021-English")
+
+speech %>%
+  html_elements(".qna , p:nth-child(139)") %>%
+  html_elements("p") %>%
+  html_text2()
+```
+
