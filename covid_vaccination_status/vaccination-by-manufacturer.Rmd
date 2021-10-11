@@ -1,0 +1,97 @@
+---
+title: "vaccination type"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r library}
+library(lubridate)
+library(dplyr)
+library(tidyverse)
+library(scales)
+theme_set(theme_light())
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r  echo=FALSE}
+vaccination_manufacturer <-read.csv(file="./country_vaccinations_by_manufacturer.csv")
+
+month_names <- c("Jan", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Aug", "Sep")
+
+day_names <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+
+vaccination_manufacturer <- vaccination_manufacturer %>%
+  mutate(date = as_date(vaccination_manufacturer$date)) %>%
+  mutate(year = year(vaccination_manufacturer$date))%>%
+  mutate(month = factor(month(vaccination_manufacturer$date), labels = month_names))%>%
+  mutate(dayofweek = wday(vaccination_manufacturer$date, label = TRUE))%>%
+view()
+
+vaccination_manufacturer %>%
+  filter(year == "2021") %>%
+  group_by(year, month, vaccine) %>% 
+  summarise(total = sum(total_vaccinations)) %>%
+  mutate(vaccine = as.factor(vaccine),
+         vaccine = fct_reorder(vaccine, total, sum)) %>%
+  ggplot(aes(month, total, fill = vaccine))+
+  geom_col()+
+  scale_y_continuous(labels = label_number_si())+
+  coord_flip()
+
+vaccination_manufacturer %>%
+  filter(year == "2021") %>%
+  mutate(vaccine = as.factor(vaccine),
+         vaccine = fct_reorder(vaccine, total_vaccinations, sum, .desc = FALSE)) %>%
+  group_by(vaccine) %>%
+  summarise(total = sum(total_vaccinations)) %>%
+  ggplot(aes(vaccine, total))+
+  geom_col()+
+  scale_y_continuous(labels = label_number_si())+
+  coord_flip()
+  
+vaccination_manufacturer %>%
+  filter(year == "2021") %>%
+  mutate(vaccine = as.factor(vaccine),
+         vaccine = fct_reorder(vaccine, total_vaccinations, sum, .desc = FALSE)) %>%
+  group_by(year, month, vaccine) %>%
+  summarise(total = sum(total_vaccinations)) %>% 
+  ggplot(aes(month, total, fill = vaccine))+
+  geom_col()+
+  scale_y_continuous(labels = label_number_si())+
+  coord_flip()
+
+
+vaccination_manufacturer %>%
+  filter(year == "2021") %>%view()
+  mutate(vaccine = as.factor(vaccine),
+         vaccine = fct_reorder(vaccine, total_vaccinations, sum, .desc = FALSE)) %>%
+  group_by(dayofweek, vaccine) %>%
+  summarise(total = sum(total_vaccinations)) %>%  
+  ggplot(aes(dayofweek, total, fill = vaccine))+
+  geom_col()+
+  scale_y_continuous(labels = label_number_si())+
+  coord_flip()
+
+```
+```{r}
+vaccination_manufacturer %>%
+  filter(year == "2021") %>%
+  mutate(location = as.factor(location)) %>%
+  count(location)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

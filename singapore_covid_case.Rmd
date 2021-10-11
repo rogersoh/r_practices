@@ -1,0 +1,54 @@
+---
+title: "Singapore covid cases"
+author: "Roger Soh"
+date: "10/11/2021"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r}
+library(tidyverse)
+library(ggplots)
+```
+
+
+```{r}
+df <- read.csv(file="./data/covid-19-case-numbers/cases-in-icu-or-requires-oxygen-supplement.csv")
+
+breakdown_of_number_of_active_cases_in_hospital_covid_19_treatment_facilities_community <- read_csv("./data/covid-19-case-numbers/breakdown-of-number-of-active-cases-in-hospital-covid-19-treatment-facilities-community.csv")
+
+deaths_and_active_cases_in_icu_requiring_oxygen_supplementation_or_hospitalised <- read_csv("./data/covid-19-case-numbers/deaths-and-active-cases-in-icu-requiring-oxygen-supplementation-or-hospitalised.csv")
+
+
+
+names(df)
+```
+
+```{r}
+deaths_and_active_cases_in_icu_requiring_oxygen_supplementation_or_hospitalised %>%
+  ggplot(aes(day_of_as_of_date, count_of_case, fill=age_groups))+
+  geom_col()+
+  facet_wrap(~ clinical_status, scales="free_y")
+
+```
+
+```{r}
+deaths_by_cause_and_type_of_certification <- read_csv("./data/death/deaths-by-cause-and-type-of-certification.csv")
+
+deaths_by_cause_and_type_of_certification %>%
+  mutate(icd_main_category = as.factor(icd_main_category))
+
+deaths_by_cause_and_type_of_certification %>%
+  mutate(icd_main_category = fct_lump(n=4, icd_main_category, w=death_count))%>%
+  ggplot(aes(year, death_count, fill=icd_main_category))+
+  geom_col()
+
+deaths_by_cause_and_type_of_certification %>%
+  group_by(year, icd_main_category) %>%
+  summarise(death = sum(death_count)) %>%
+  mutate(icd_main_category = fct_lump(n = 5,icd_main_category, w =death))%>%
+  ggplot(aes(year, death, fill=icd_main_category))+
+  geom_col()
+```
+

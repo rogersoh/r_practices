@@ -1,0 +1,181 @@
+---
+title: "TidyTemplate"
+date: 2021-08-11
+output: html_output
+editor_options: 
+  chunk_output_type: console
+---
+
+# TidyTuesday
+
+Join the R4DS Online Learning Community in the weekly #TidyTuesday event!
+Every week we post a raw dataset, a chart or article related to that dataset, and ask you to explore the data.
+While the dataset will be “tamed”, it will not always be tidy! As such you might need to apply various R for Data Science techniques to wrangle the data into a true tidy format.
+The goal of TidyTuesday is to apply your R skills, get feedback, explore other’s work, and connect with the greater #RStats community!
+As such we encourage everyone of all skills to participate!
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(tidytuesdayR)
+library(scales)
+theme_set(theme_light())
+
+```
+
+# Load the weekly Data
+
+Dowload the weekly data and make available in the `tt` object.
+
+```{r Load}
+
+tt <- tt_load("2021-06-08")
+tt$fishing
+
+fishing <- tt$fishing %>%
+  filter(!is.na(values)) %>%
+  filter(values >= 0)
+
+stock <- tt$stocked
+
+
+```
+
+
+```{r explore}
+fishing %>%
+  ggplot(aes(values + 1))+
+  geom_histogram()+
+  scale_x_log10()
+
+fishing %>%
+  count(lake)
+
+fishing <- fishing %>%
+  mutate(species = str_to_title(species)) %>%
+  mutate(species = if_else(species=="Amercian Eel","American Eel", species)) %>%
+  mutate(species = if_else(species == "Bullheads", "Bullhead", species)) %>%
+  mutate(species = if_else(species == "Channel Catfish", "Channel Catfish", species)) %>%
+  mutate(species = if_else(species == "Cisco And Chubs", "Cisco And Chub", species))
+
+
+
+fishing %>%
+  count(species) %>%
+  view()
+
+fishing %>%
+  group_by(year, lake, species) %>%
+  summarise(total_values = sum(values, na.rm= TRUE),
+            first_grand_total = min(grand_total, na.rm = TRUE),
+            n_grand_total = n_distinct(grand_total, na.rm = TRUE)) %>% 
+  view() %>%
+  ungroup() %>%
+  count(n_grand_total)
+
+summarise_fishing <- function(tbl){
+  tbl %>% 
+    summarise(n_obs = n(),
+              total_production = sum(values, na.rm = TRUE)) %>%
+    arrange(desc(total_production))
+}
+
+fishing %>%
+  summarise_fishing()
+
+fishing %>%
+  group_by(decade = 10*year %/% 10) %>%
+  summarise_fishing() %>%
+  ggplot(aes(decade, total_production))+
+  geom_col()+
+  scale_y_continuous(labels = comma_format()) +
+  labs(x = "Decade",
+       y = "Total Proudction per decade (Thousand pound)")
+fishing %>%
+  group_by(year) %>%
+  summarise_fishing()
+
+
+fishing %>%
+  group_by(species) %>%
+  summarise_fishing()
+
+fishing %>%
+  mutate(species = fct_lump(species, 5, w = values),
+         species = fct_reorder(species, values, sum)) %>%
+  group_by(decade = 10*year %/% 10,
+           species) %>%
+  summarise_fishing() %>%
+  ggplot(aes(decade, total_production, fill = species))+
+  geom_col()+
+  scale_y_continuous(labels = comma_format()) +
+  labs(x = "Decade",
+       y = "Total Proudction per decade (Thousand pound)")
+
+fishing %>%
+  mutate(species = fct_lump(species, 5, w = values),
+         species = fct_reorder(species, values, sum, .desc = TRUE)) %>%
+  group_by(decade = 10*year %/% 10,
+           species) %>%
+  summarise_fishing() %>%
+  ggplot(aes(decade, total_production, fill = species))+
+  geom_area()+
+  scale_y_continuous(labels = comma_format()) +
+  facet_wrap(~ species) +
+  labs(x = "Decade",
+       y = "Total Proudction per decade (Thousand pound)")
+
+fishing %>%
+  mutate(  #lake = fct_lump(lake, 3, w = values),
+         lake = fct_reorder(lake, values, sum, .desc = TRUE)) %>%
+  group_by(decade = 10*year %/% 10,
+           lake) %>%
+  summarise_fishing() %>%
+  ggplot(aes(decade, total_production, fill = lake))+
+  geom_area()+
+  scale_y_continuous(labels = comma_format()) +
+  facet_wrap(~ lake) +
+  labs(x = "Decade",
+       y = "Total Proudction per decade (Thousand pound)")
+
+fishing %>%
+  group_by(year) %>%
+  summarise_fishing()
+
+```
+
+```{r stock} 
+stock %>%
+  ggplot(aes(NO_STOCKED + 1))+
+  geom_histogram()+
+  scale_x_log10()
+
+stock %>%
+  count(SPECIES) %>%
+  view()
+
+
+stock <- stock %>%
+  mutate(LAKE = case_when(
+    LAKE == "ER" ~ "Erie",
+    LAKE == "HU" ~ "Huron",
+    LAKE == "MI" ~ "Michigan",
+    LAKE == "ON" ~ "Ontario",
+    LAKE == "SC" ~ "Saint Clair",
+    LAKE == "SU" ~ "Superior",
+  )) 
+
+stock%>%
+  count(SPECIES)
+
+stock %>%
+  group_by(YEAR)%>%
+  mutate(TOTAL_NO_STOCKED = sum(NO_STOCKED)) %>%
+  view() %>%
+  ggplot(aes(YEAR, TOTAL_NO_STOCKED))+
+  geom_line()
+
+```
+

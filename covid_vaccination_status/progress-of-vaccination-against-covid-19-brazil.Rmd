@@ -1,0 +1,777 @@
+---
+title: ""
+author: ""
+date: ""
+output: html_document
+theme: cosmo
+highlight: tango
+editor_options: 
+  chunk_output_type: console
+---
+
+<!--CSS DA PAGINA COMO UM TODO-->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+<style>
+p {
+  src: url(@baseUrl/Design/fonts/mail/din-pro/DINPro-Medium.otf);
+  font-family: 'DINPro';
+  font-style: Light;
+  font-weight: 510;
+  font-size: 1.24em;
+}
+
+h2 {
+  color: black;
+}
+
+* h3, h4, h5 {
+  font-family: 'DINPro';
+  color: black;
+}
+
+</style>
+
+
+```{r echo=F}
+knitr::opts_chunk$set(warning=FALSE, message=FALSE)
+```
+
+---
+
+<center><img src="https://uploaddeimagens.com.br/images/003/123/721/full/tema.gif?1615375234" width=80%;></center>
+
+---
+
+```{r echo=F}
+
+# Instalação de Pacotes
+# install.packages("highcharter")
+# install.packages("lubridate")
+# install.packages("xtable")
+# install.packages("dplyr")
+
+# Carregando os pacotes instalados
+library(highcharter)
+library(lubridate)
+library(xtable)
+library(dplyr)
+library(tidyverse)
+
+```
+
+
+```{r echo=F}
+
+# Load all dataset
+dados <- read.csv(file="./data/covid_vaccination/country_vaccinations.csv")
+
+# -------------- LUBRIDADTE -------------- #
+# Transformation to date type with lubridate
+dados$date <- as_date(dados$date)
+
+# Year
+dados$year <- year(dados$date)
+
+# Selecting only the dates referring to 2021
+dados <- filter(dados, year == 2021)
+
+# Month
+month_names <- c("Jan", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Aug","sep","oct")
+dados$Month <- factor(month(dados$date), labels=month_names)
+
+# Week
+names_week <- c("1º Week", "2º Week", "3º Week", "4º Week", "5º Week", "6º Week", "7º Week", "8º Week",
+                "9º Week", "10º Week", "11º Week", "12º Week", "13º Week", "14º Week", "15º Week", "16º Week",
+                "17º Week", "18º Week", "19º Week", "20º Week","21º Week", "22º Week", "23º Week", "24º Week", 
+                "25º Week", "26º Week", "27º Week", "28º Week", "29º Week", "30º Week", "31º Week", "32º Week", 
+                "33º Week","34º Week","35º Week","36º Week","37º Week",
+                "38º Week","39º Week","40º Week","41º Week" )
+dados$week <- factor(week(dados$date), labels=names_week) 
+
+# Day_week
+names_day <- c("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+dados$day_week = factor(wday(dados$date), labels = names_day)
+# -------------- #--------# -------------- #
+
+# Selecting only Brazilian observations
+dados_brasil <- filter(dados, country=="Brazil")
+
+dados_singapore <- filter(dados, country=="Singapore")
+
+```
+
+## Total number of vaccinations in Brazil over time
+
+Vaccination against COVID-19 in Brazil began on January 17, 2021, when the country already had 210,000 deaths from the disease. As of the time of this analysis, more than 17 million people have been vaccinated. <br><br>
+
+```{r echo=F}
+
+a <- dados_brasil[!is.na(dados_brasil$total_vaccinations), ] %>% 
+  hchart('area', hcaes(x = date, y = total_vaccinations), name="Total number of vaccinations: ", fillOpacity = 0.1, lineWidth = 3.1) %>%
+  hc_yAxis(title = list(text = "Total number of vaccinations"), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_xAxis(title = list(text = ""), gridLineWidth=0,
+           labels=list(style=list(fontWeight="italic"))) %>%
+  hc_title(text = "Total number of vaccinated people over 2021", align = "center") %>%
+  hc_subtitle(text = "Brazil", align = "center")  %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_colors(c("#EF2F3A", "#024649"))  %>%
+  hc_tooltip(
+            borderColor = "black",
+            style = list(fontSize = "14px", textOutline = "0.3px #404040"),
+            borderWidth = 0,
+            pointFormat = "<strong style='color: #4F4F4F;'>{series.name}</strong>: <b>{point.y}</b><br/>", 
+            shared = TRUE,
+            crosshairs = TRUE)
+hw_grid(a, ncol=1, rowheight = 430)
+total_vacinados <- dados_brasil$total_vaccinations[dim(dados_brasil)[1]]
+
+```
+
+```{r Singapore}
+
+a <- dados_singapore[!is.na(dados_singapore$total_vaccinations), ] %>% 
+  hchart('area', hcaes(x = date, y = total_vaccinations), name="Total number of vaccinations: ", fillOpacity = 0.1, lineWidth = 3.1) %>%
+  hc_yAxis(title = list(text = "Total number of vaccinations"), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_xAxis(title = list(text = ""), gridLineWidth=0,
+           labels=list(style=list(fontWeight="italic"))) %>%
+  hc_title(text = "Total number of vaccinated people over 2021", align = "center") %>%
+  hc_subtitle(text = "Singapore", align = "center")  %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_colors(c("#EF2F3A", "#024649"))  %>%
+  hc_tooltip(
+            borderColor = "black",
+            style = list(fontSize = "14px", textOutline = "0.3px #404040"),
+            borderWidth = 0,
+            pointFormat = "<strong style='color: #4F4F4F;'>{series.name}</strong>: <b>{point.y}</b><br/>", 
+            shared = TRUE,
+            crosshairs = TRUE)
+hw_grid(a, ncol=1, rowheight = 430)
+total_vacinados <- dados_singapore$total_vaccinations[dim(dados_singapore)[1]]
+
+```
+
+
+
+## Percentage of the vaccinated Brazilian population
+
+```{r echo=F}
+
+# Obtaining the vaccination percentage in relation to the population of BRAZIL
+# dados_brasil$total_vaccinations_per_hundred
+
+```
+
+According to the <strong><a href="https://www.ibge.gov.br/" target="_blank">IBGE-Instituto Brasileiro de Geografia e Estatística</a></strong>, the Brazilian population in 2021 exceeds 212.80 million inhabitants.
+
+The sector chart below shows the percentage of people in the Brazilian population who have already received at least the first dose of the vaccine.
+
+<br><br>
+
+<!-- GRAPH I -Percentage of total vaccinated persons vs population -->
+<style>
+
+#container0 {
+  height: 400px; 
+}
+
+.highcharts-figure0, .highcharts-data-table table {
+  background: #FCFCFC;
+  min-width: 320px; 
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+.highcharts-data-table table {
+  font-family: Verdana, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #EBEBEB;
+  margin: 10px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+.highcharts-data-table th {
+  font-weight: 600;
+  padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
+
+
+</style>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure0">
+    <div id="container0"></div>
+</figure>
+
+<script>
+
+Highcharts.chart('container0', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Percentage of the vaccinated population'
+    },
+    subtitle: {
+        text: 'Brazil'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Percent (%); ',
+        keys: ['name', 'y', 'selected', 'sliced', 'color'],
+        data: [
+            ['Not vaccinated 👥', 74.08, false, false, '#011015'],
+            ['Vaccinated 👥 💉', 25.92, false, true, '#EF2F3A']
+        ],
+        showInLegend: false
+    }]
+});
+
+</script>
+
+It is worth mentioning that the graph above uses all the people who received at least one dose of the vaccine, that is, people who were fully vaccinated and those who received only the first dose of the vaccine.
+
+The following sectoral graph shows the percentage of people in the Brazilian population who have been fully vaccinated and the percentage of people who have not yet been fully vaccinated.
+
+<br><br>
+
+```{r echo=F}
+
+# Obtaining the Percentage of people fully vaccinated vs population - BRAZIL
+# dados_brasil$people_fully_vaccinated_per_hundred
+
+```
+
+<!-- GRAPH II - Percentage of total people fully vaccinated vs population -->
+<style>
+
+#container1 {
+  height: 400px; 
+}
+
+.highcharts-figure1, .highcharts-data-table table {
+  background: #FCFCFC;
+  min-width: 320px; 
+  max-width: 800px;
+  margin: 1em auto;
+}
+
+.highcharts-data-table table {
+  font-family: Verdana, sans-serif;
+  border-collapse: collapse;
+  border: 1px solid #EBEBEB;
+  margin: 10px auto;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+.highcharts-data-table caption {
+  padding: 1em 0;
+  font-size: 1.2em;
+  color: #555;
+}
+.highcharts-data-table th {
+  font-weight: 600;
+  padding: 0.5em;
+}
+.highcharts-data-table td, .highcharts-data-table th, .highcharts-data-table caption {
+  padding: 0.5em;
+}
+.highcharts-data-table thead tr, .highcharts-data-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+.highcharts-data-table tr:hover {
+  background: #f1f7ff;
+}
+
+
+</style>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure1">
+    <div id="container1"></div>
+</figure>
+
+<script>
+
+Highcharts.chart('container1', {
+    chart: {
+        type: 'pie',
+        options3d: {
+            enabled: true,
+            alpha: 45
+        }
+    },
+    title: {
+        text: 'Percentage of the number of people in the population fully vaccinated'
+    },
+    subtitle: {
+        text: 'Brazil'
+    },
+    tooltip: {
+      pointFormat: '{series.name}: <b>{point.percentage:.2f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            innerSize: 100,
+            depth: 45
+        }
+    },
+    series: [{
+        name: 'Percentual (%); ',
+        keys: ['name', 'y', 'selected', 'sliced', 'color'],
+        data: [
+            ['Not fully vaccinated 👥', 91.66, false, false, '#011015'],
+            ['Fully Vaccinated 👥💉💉', 8.34, true, true, '#EF2F3A']
+        ],
+        showInLegend: false
+    }]
+});
+
+</script>
+
+## Comparison of the total number of vaccinations in Brazil with other countries
+
+Taking into account only the total number of people vaccinated by country, Brazil is, until the moment of this analysis, in the 6th position, behind only the countries: United States, China, United Kingdom, India and England. This data set (<a href="https://www.kaggle.com/gpreda/covid-world-vaccination-progress" target="_blank">COVID-19 World Vaccination Progress</a>) contains information from 130 countries.<br>
+
+```{r echo=F}
+
+df_total_vacina <- dados %>% 
+                    group_by(country) %>% 
+                    slice(which.max(total_vaccinations)) %>%
+                    arrange(desc(total_vaccinations))
+
+```
+
+
+
+```{r echo=F}
+
+df_brasil_6 <- df_total_vacina %>%
+  select(country, total_vaccinations, total_vaccinations_per_hundred) %>%
+  head(6)
+
+df_brasil_6 <- data.frame(Position=c("1º", "2º", "3º", "4º", "5º", "6º"),
+                          country=df_brasil_6$country,
+                          total_vaccinations=df_brasil_6$total_vaccinations,
+                          total_vaccinations_per_hundred=df_brasil_6$total_vaccinations_per_hundred)
+
+# Printing table
+# df_brasil_6
+```
+
+
+```{r echo=F}
+
+# Selecting only data from the six countries
+cols_6 <- c("United States", "China", "India")
+b <- dados[!is.na(dados$total_vaccinations), ] %>%
+  filter(country %in%  cols_6)%>% 
+  hchart('line', hcaes(x = date, y = total_vaccinations, group = country), lineWidth = 3.1) %>%
+  hc_yAxis(title = list(text = "Total number of vaccinated"), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_xAxis(title = list(text = ""), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_title(text = "Total number of vaccinations throughout 2021", align = "center") %>%
+  hc_subtitle(text = "The six countries with the highest total number of vaccinations", align = "center") %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_colors(c("#1C2333", "#00C9FF", "#01DD9F", "#FD0F6B", "#FFC603", "#293B63")) %>%
+  hc_tooltip(
+            borderColor = "black",
+            style = list(fontSize = "14px", textOutline = "0.3px #404040"),
+            borderWidth = 0,
+            pointFormat = "<strong style='color: #4F4F4F;'>{series.name}</strong>: <b>{point.y}</b><br/>", 
+            crosshairs = TRUE)
+
+hw_grid(b, ncol=1, rowheight = 430)
+```
+
+## Vaccination progress every week <br><br>
+
+```{r echo=F}
+
+df_progress_percent_semanal <- 
+  dados_brasil %>%
+    select(week, total_vaccinations_per_hundred) %>%
+    group_by(week) %>% 
+    slice(which.max(total_vaccinations_per_hundred))
+
+
+# Part - 1
+hc_opts <- list()
+hc_opts$title <- list(text = "Percentage of vaccination of the population over the weeks", x = -20, align = "center")
+hc_opts$xAxis <- list(categories = df_progress_percent_semanal$week)
+hc_opts$series <- list(list(name = "", 
+                            lineWidth = 3.1,
+                            type = "area",
+                            fillOpacity = 0.2,
+                            data=df_progress_percent_semanal$total_vaccinations_per_hundred,
+                            dataLabels = list(enabled = TRUE, format='{point.y:.2f}%')))
+
+c <- highchart(hc_opts) %>%
+  hc_legend(enabled = FALSE) %>%
+  hc_subtitle(text = "Brazil", align = "center") %>%
+  hc_yAxis(title = list(text = "Percentage of the vaccinated population (%)"), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_xAxis(title = list(text = ""), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic")))  %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_colors(c("#EF2F3A", "#024649")) %>%
+  hc_tooltip(
+            borderColor = "black",
+            borderWidth = 0,
+            style = list(fontSize = "15px", textOutline = "0.3px #404040"),
+            pointFormat = "<strong style='color: #4F4F4F;'>{series.name}</strong> <b>{point.y}%</b><br/>")
+
+hw_grid(c, ncol=1, rowheight = 430)
+```
+
+<br><br>
+
+```{r echo=F}
+
+df_progress_percent_semanal_3 <- 
+  dados %>%
+    filter(country %in% cols_6) %>%
+    select(week, total_vaccinations_per_hundred, country) %>%
+    group_by(week, country) %>% 
+    slice(which.max(total_vaccinations_per_hundred))
+
+
+df_progress_per_us <- filter(df_progress_percent_semanal_3, country=="United States" & week %in% names_week[c(3:length(names_week))])
+df_progress_per_uk <- filter(df_progress_percent_semanal_3, country=="United Kingdom" & week %in% names_week[c(3:length(names_week))])
+df_progress_per_england <- filter(df_progress_percent_semanal_3, country=="England" & week %in% names_week[c(3:length(names_week))])
+df_progress_per_india <- filter(df_progress_percent_semanal_3, country=="India" & week %in% names_week[c(3:length(names_week))])
+df_progress_per_br <- filter(df_progress_percent_semanal_3, country=="Brazil" & week %in% names_week[c(3:length(names_week))])
+
+
+# Part 1 - United States
+hc_opts <- list()
+hc_opts$title <- list(text = "Percentage of vaccination of the population over the weeks", x = -20, align = "center")
+
+hc_opts$xAxis <- list(categories = df_progress_per_us$week)
+hc_opts$series <- list(list(name = "United States", 
+                            lineWidth = 3.1,
+                            type = "area",
+                            fillOpacity = 0.4,
+                            data=df_progress_per_us$total_vaccinations_per_hundred,
+                            dataLabels = list(enabled = TRUE, format='{point.y:.2f}%')))
+
+# Part 2 - United Kingdom
+hc_opts$series <- append(hc_opts$series,
+                    list(list(name = "United Kingdom",
+                              lineWidth = 3.1,
+                              type = "area",
+                              fillOpacity = 0.2,
+                              data = df_progress_per_uk$total_vaccinations_per_hundred,
+                              dataLabels = list(enabled = TRUE, format='{point.y:.2f}%'))))
+
+
+# Part 3 - England
+hc_opts$series <- append(hc_opts$series,
+                    list(list(name = "England",
+                              lineWidth = 3.1,
+                              type = "area",
+                              fillOpacity = 0.1,
+                              data = df_progress_per_england$total_vaccinations_per_hundred,
+                              dataLabels = list(enabled = TRUE, format='{point.y:.2f}%'))))
+
+
+# Part 4 - Brazil
+hc_opts$series <- append(hc_opts$series,
+                    list(list(name = "Brazil",
+                              lineWidth = 3.1,
+                              type = "area",
+                              fillOpacity = .4,
+                              data = df_progress_per_br$total_vaccinations_per_hundred,
+                              dataLabels = list(enabled = TRUE, format='{point.y:.2f}%'))))
+
+# Part 5 - India
+hc_opts$series <- append(hc_opts$series,
+                    list(list(name = "India",
+                              lineWidth = 3.1,
+                              type = "area",
+                              data = df_progress_per_india$total_vaccinations_per_hundred,
+                              dataLabels = list(enabled = TRUE, format='{point.y:.2f}%'))))
+
+
+d <- highchart(hc_opts)  %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_yAxis(title = list(text = "Percentage of vaccination (%)"), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_xAxis(title = list(text = ""), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_colors(c("#CB1E53", "#011015", "#493B55", "#0D84FA", "#9BB459", "#F7C232", "#199F86")) %>%
+  hc_tooltip(
+            borderColor = "black",
+            style = list(fontSize = "14px", textOutline = "0.3px #404040"),
+            borderWidth = 0,
+            valueSuffix = "%",
+            pointFormat = "<strong style='color: #4F4F4F;'>{series.name}</strong>: <b>{point.y}</b><br/>", 
+            crosshairs = TRUE,
+            shared = TRUE)
+
+hw_grid(d, ncol=1, rowheight = 430)
+```
+
+
+Looking at table 1 and the two graphs above, it is clear that although India has a total number of vaccinations of 24.46 million more than Brazil, the percentage of the vaccinated Indian population is less than that of Brazil, with a difference of 3.28%. This difference is mainly due to the difference in proportion between the populations of these countries, which can be seen in Table 2.
+
+<!-- Loading table 2 from the web -->
+<center><img src="https://uploaddeimagens.com.br/images/003/128/254/full/tabela2.png?1615551824" width=40%;></center><br>
+
+## Average vaccination per day of the week <br><br>
+
+```{r echo=F}
+
+df_mean_day_vacination <- dados_brasil %>%
+                            group_by(day_week) %>%
+                            summarise(mean_day_vacination=mean(daily_vaccinations))
+df_mean_day_vacination <- na.omit(df_mean_day_vacination)
+
+
+e <- highchart() %>%
+  hc_title(text = "Average Vaccination per day of the week") %>% 
+  hc_subtitle(text = "Brazil") %>% 
+  hc_chart(type = "column") %>% 
+  hc_xAxis(categories = df_mean_day_vacination$day_week, gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>% 
+  hc_add_series(name = "", data = round(df_mean_day_vacination$mean_day_vacination),
+             dataLabels = list(enabled = TRUE, format='{point.y}', style=list(fontWeight="italic", fontSize="15px"))) %>%
+  hc_legend(enabled = FALSE) %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_colors(c("#EF2F3A")) %>%
+  hc_yAxis(title = list(text = "Average Vaccination"), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_xAxis(title = list(text = "")) %>% 
+        hc_tooltip(
+          useHTML = TRUE,
+          style = list(fontSize = "24px"),
+          headerFormat = "",
+          pointFormat = "",
+          shadow=F,
+          borderWidth = 0,
+          backgroundColor = "transparent",
+          hideDelay = 1000)
+hw_grid(e, ncol=1, rowheight = 430)
+```
+
+
+```{r echo=F}
+
+df_mean_day_vacination <- dados_singapore %>%
+                            group_by(day_week) %>%
+                            summarise(mean_day_vacination=mean(daily_vaccinations))
+df_mean_day_vacination <- na.omit(df_mean_day_vacination)
+
+
+e <- highchart() %>%
+  hc_title(text = "Average Vaccination per day of the week") %>% 
+  hc_subtitle(text = "Singapore") %>% 
+  hc_chart(type = "column") %>% 
+  hc_xAxis(categories = df_mean_day_vacination$day_week, gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>% 
+  hc_add_series(name = "", data = round(df_mean_day_vacination$mean_day_vacination),
+             dataLabels = list(enabled = TRUE, format='{point.y}', style=list(fontWeight="italic", fontSize="15px"))) %>%
+  hc_legend(enabled = FALSE) %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_colors(c("#EF2F3A")) %>%
+  hc_yAxis(title = list(text = "Average Vaccination"), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_xAxis(title = list(text = "")) %>% 
+        hc_tooltip(
+          useHTML = TRUE,
+          style = list(fontSize = "24px"),
+          headerFormat = "",
+          pointFormat = "",
+          shadow=F,
+          borderWidth = 0,
+          backgroundColor = "transparent",
+          hideDelay = 1000)
+hw_grid(e, ncol=1, rowheight = 430)
+```
+<br><br>
+
+```{r echo=F}
+
+cols_4 <- c("United States", "China", "Brazil")
+df_mean_vacination_day <- dados %>%
+  select(country, day_week, daily_vaccinations) %>%
+  filter(country %in% cols_4) %>%
+  group_by(day_week, country) %>%
+  summarise(mean_day_vacination=mean(daily_vaccinations))
+
+
+df_mean_day_united_states <- filter(df_mean_vacination_day, country=="United States")
+df_mean_day_china         <- filter(df_mean_vacination_day, country=="China")
+df_mean_day_brasil        <- filter(df_mean_vacination_day, country=="Brazil")
+
+# Column Chart - 3D
+f <- highchart() %>% 
+  hc_xAxis(categories = df_mean_day_united_states$day_week, gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>% 
+  hc_add_series(name = "United States", data = round(df_mean_day_united_states$mean_day_vacination), dataLabels=list(enabled = TRUE, format='{point.y:.0f}')) %>% 
+  hc_add_series(name = "China", data = round(df_mean_day_china$mean_day_vacination), dataLabels=list(enabled = TRUE, format='{point.y:.0f}')) %>% 
+  hc_add_series(name = "Brazil", data = round(df_mean_day_brasil$mean_day_vacination), dataLabels=list(enabled = TRUE, format='{point.y:.0f}')) %>% 
+  hc_chart(type = "column") %>%
+  hc_legend(align = "center") %>%
+  hc_title(text = "Comparison between vaccination averages in Brazil, United States and China") %>%
+  hc_yAxis(title = list(text = "Average Vaccination"), gridLineWidth=0,
+                 labels=list(style=list(fontWeight="italic"))) %>%
+  hc_colors(c("#EF2F3A", "#011015", "#024649")) %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_tooltip(
+            borderColor = "black",
+            borderWidth = 0,
+            style = list(fontSize = "15px", textOutline = "0.3px #404040"),
+            pointFormat = "<strong style='color: #4F4F4F;'>{series.name}</strong> <b>{point.y}</b><br/>",
+            shared = TRUE,
+            crosshairs = TRUE)
+
+hw_grid(f, ncol=1, rowheight = 430)
+```
+
+## Information on a global scale {.tabset .tabset-fade .tabset-pills} 
+<br>
+
+### Total vaccination
+
+```{r echo=F}
+
+# Organizaztion total_vaccinations by country
+df_1_map <- dados %>%
+              select(total_vaccinations, country) %>%
+              group_by(country) %>% 
+              slice(which.max(total_vaccinations))
+
+# Load the world Map data
+data(worldgeojson, package = "highcharter")
+highchart() %>%
+  hc_add_series_map(
+    worldgeojson, df_1_map, value = "total_vaccinations", joinBy = c('name','country'),
+    name = "Total number of vaccinations"
+    )  %>% 
+  hc_colorAxis(stops = color_stops()) %>% 
+  hc_title(text = "Total number of vaccinations by country") %>% 
+  hc_subtitle(text = "")  %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_tooltip(borderColor = "black",
+             borderWidth = 0,
+             style = list(fontSize = "14px", textOutline = "0.3px #404040"))
+
+```
+
+### Percentage of the vaccinated population
+
+```{r echo=F}
+
+# Organizaztion total_vaccinations_per_hundred by country
+df_2_map <- dados %>%
+              select(total_vaccinations_per_hundred, country) %>%
+              group_by(country) %>% 
+              slice(which.max(total_vaccinations_per_hundred))
+
+highchart() %>%
+  hc_add_series_map(
+    worldgeojson, df_2_map, value = "total_vaccinations_per_hundred", joinBy = c('name','country'),
+    name = "Percentage of the vaccinated population"
+    )  %>% 
+  hc_colorAxis(stops = color_stops()) %>% 
+  hc_title(text = "Percentage of the vaccinated population by country") %>% 
+  hc_subtitle(text = "") %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_tooltip(borderColor = "black",
+             valueSuffix = "%",
+             borderWidth = 0,
+             style = list(fontSize = "14px", textOutline = "0.3px #404040"))
+
+```
+
+
+
+### Percentage of the population fully vaccinated
+
+```{r echo=F}
+
+# Organizaztion people_fully_vaccinated_per_hundred by country
+df_3_map <- dados %>%
+              select(people_fully_vaccinated_per_hundred, country) %>%
+              group_by(country) %>% 
+              slice(which.max(people_fully_vaccinated_per_hundred))
+
+
+highchart() %>%
+  hc_add_series_map(
+    worldgeojson, df_3_map, value = "people_fully_vaccinated_per_hundred", joinBy = c('name','country'),
+    name = "Percentage of the population fully vaccinated"
+    )  %>% 
+  hc_colorAxis(stops = color_stops()) %>% 
+  hc_title(text = "Percentage of the population fully vaccinated by country") %>% 
+  hc_subtitle(text = "") %>%
+  hc_add_theme(hc_theme_google()) %>%
+  hc_tooltip(borderColor = "black",
+             valueSuffix = "%",
+             borderWidth = 0,
+             style = list(fontSize = "14px", textOutline = "0.3px #404040"))
+
+```
+
+<br><br>
+
+## References
+
+---
+
+Total population in the United States from 2015 to 2025. statista. October 2020. Available in: <a href="https://www.statista.com/statistics/263762/total-population-of-the-united-states/" target="_blank">https://www.statista.com/statistics/263762/total-population-of-the-united-states/</a>
+
+China Population 1950-2021. macrotrends. macrotrends. Available in: <a href="https://www.macrotrends.net/countries/CHN/china/population#:~:text=The%20current%20population%20of%20China,a%200.39%25%20increase%20from%202019." target="_blank">https://www.macrotrends.net/countries/CHN/china/population</a>
+
+Total population of the United Kingdom (UK) from 2015 to 2025. statista. October 2020. Available in: <a href="https://www.statista.com/statistics/263754/total-population-of-the-united-kingdom/" target="_blank">https://www.statista.com/statistics/263754/total-population-of-the-united-kingdom/</a>
+
+India Population Growth Rate 1950-2021. Available in:<br><a href="https://www.macrotrends.net/countries/IND/india/population-growth-rate#:~:text=The%20current%20population%20of%20India,a%200.97%25%20increase%20from%202020." target="_blank">https://www.macrotrends.net/countries/IND/india/population-growth-rate#</a>
+
+U.K. Population 1950-2021. macrotrends. Available in:<br><a href="https://www.macrotrends.net/countries/GBR/united-kingdom/population#" target="_blank">https://www.macrotrends.net/countries/GBR/united-kingdom/population#</a>
+
+IBGE | Portal do IBGE | IBGE:<br><a href="https://www.ibge.gov.br/" target="_blank">https://www.ibge.gov.br/</a>
+
+---

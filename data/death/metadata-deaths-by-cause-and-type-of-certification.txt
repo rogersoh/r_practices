@@ -1,0 +1,69 @@
+# Metadata for Deaths By Cause And Type of Certification
+---
+Identifier: 'c5fe8824-51d1-466d-87eb-de728e7540fe'
+Name: 'deaths-by-cause-and-type-of-certification'
+Title: 'Deaths By Cause And Type of Certification'
+Description:
+  - 'Published in Report on Registration of Births and Deaths which aims to provide
+    an overview on the annual changes in population, births and deaths.'
+  - ''
+  - 'Note: The causes of death are adapted from the Mortality Tabulation List of the
+    International Classification of Diseases - Tenth Revision.'
+Topics:
+  - 'Society'
+Keywords:
+  - 'causes of death'
+  - 'death'
+Publisher:
+  Name: 'Ministry of Home Affairs - Immigration & Checkpoints Authority'
+  Admin 1:
+    Name: 'Gng Cheang Wee'
+    Department: 'Immigration & Checkpoints Authority'
+    Email: 'GNG_Cheang_Wee@ica.gov.sg'
+  Admin 2:
+    Name: 'Neo Soo Beng'
+    Department: 'Immigration & Checkpoints Authority'
+    Email: 'NEO_Soo_Beng@ica.gov.sg'
+Sources:
+  - 'Ministry of Home Affairs - Immigration & Checkpoints Authority'
+License: 'https://data.gov.sg/open-data-licence'
+Frequency: 'Annual'
+Coverage: '2017-01-01 to 2019-12-31'
+Last Updated: '2020-11-18T03:28:29.353144'
+Resources:
+  -
+    Identifier: '646e62ac-54ae-4d5d-bc14-962cea854c61'
+    Title: 'Deaths By Cause And Type of Certification'
+    Url: 'https://storage.data.gov.sg/deaths-by-cause-and-type-of-certification/resources/deaths-by-cause-and-type-of-certification-2020-11-18T03-28-28Z.csv'
+    Format: 'CSV'
+    Coverage: '2017-01-01 to 2019-12-31'
+    Last Updated: '2020-11-18T03:28:28.800637'
+    Schema:
+      -
+        Name: 'year'
+        Title: 'Year'
+        Type: 'datetime'
+        Sub Type: 'year'
+        Format: 'YYYY'
+      -
+        Name: 'icd_main_category'
+        Title: 'Icd main category'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'icd_detail_category'
+        Title: 'Icd detail category'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'certified_by'
+        Title: 'Certified By'
+        Type: 'text'
+        Sub Type: 'general'
+        Description: 'by doctors or coroners'
+      -
+        Name: 'death_count'
+        Title: 'Death count'
+        Type: 'numeric'
+        Sub Type: 'general'
+        Unit Of Measure: 'Number of Deaths'

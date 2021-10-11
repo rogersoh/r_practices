@@ -1,0 +1,128 @@
+# Metadata for COVID-19 case numbers
+---
+Identifier: '76abf3e8-2951-43e9-9a23-c19bf0f4bc44'
+Name: 'covid-19-case-numbers'
+Title: 'COVID-19 case numbers'
+Description: 'Numbers on COVID-19 related data'
+Topics:
+  - 'Health'
+Keywords:
+  - 'health'
+Publisher:
+  Name: 'Ministry of Health'
+  Admin 1:
+    Name: 'admin'
+    Department: 'OGP'
+    Email: 'admin@data.gov.sg'
+Sources:
+  - 'Ministry of Health'
+License: 'https://data.gov.sg/open-data-licence'
+Frequency: 'Ad-hoc'
+Coverage: '2021-09-11 to 2021-10-10'
+Last Updated: '2021-10-11T04:54:04.064298'
+Resources:
+  -
+    Identifier: 'c2c76b8e-0520-4ce5-b378-ce96d7f4d62a'
+    Title: 'Breakdown of Number of Active Cases in Hospital, COVID-19 Treatment Facilities,
+      Community'
+    Url: 'https://storage.data.gov.sg/covid-19-case-numbers/resources/breakdown-of-number-of-active-cases-in-hospital-covid-19-treatment-facilities-community-2021-10-11T03-20-30Z.csv'
+    Format: 'CSV'
+    Coverage: '2021-10-04 to 2021-10-10'
+    Last Updated: '2021-10-11T03:20:30.259466'
+    Schema:
+      -
+        Name: 'date'
+        Title: 'Date'
+        Type: 'datetime'
+        Sub Type: 'date'
+        Format: 'YYYY-MM-DD'
+      -
+        Name: 'status'
+        Title: 'Status'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'case'
+        Title: 'Case'
+        Type: 'numeric'
+        Sub Type: 'general'
+        Unit Of Measure: 'cases'
+  -
+    Identifier: '9de30d8d-3c0d-48ab-8c1b-4a7dc03d687a'
+    Title: 'Deaths and Active Cases in ICU, Requiring Oxygen Supplementation or Hospitalised'
+    Url: 'https://storage.data.gov.sg/covid-19-case-numbers/resources/deaths-and-active-cases-in-icu-requiring-oxygen-supplementation-or-hospitalised-2021-10-11T04-54-03Z.csv'
+    Format: 'CSV'
+    Coverage: '2021-09-13 to 2021-10-10'
+    Last Updated: '2021-10-11T04:54:03.304466'
+    Schema:
+      -
+        Name: 'day_of_as_of_date'
+        Title: 'Date'
+        Type: 'datetime'
+        Sub Type: 'date'
+        Format: 'YYYY-MM-DD'
+      -
+        Name: 'age_groups'
+        Title: 'Age groups'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'clinical_status'
+        Title: 'Clinical status'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'count_of_case'
+        Title: 'Count of case'
+        Type: 'numeric'
+        Sub Type: 'general'
+        Unit Of Measure: 'No. of cases'
+  -
+    Identifier: '6c14814b-09b7-408e-80c4-db3d393c7c15'
+    Title: 'Number of Community Cases by Age'
+    Url: 'https://storage.data.gov.sg/covid-19-case-numbers/resources/number-of-community-cases-by-age-2021-10-11T03-24-33Z.csv'
+    Format: 'CSV'
+    Coverage: '2021-09-13 to 2021-10-10'
+    Last Updated: '2021-10-11T03:24:33.404162'
+    Schema:
+      -
+        Name: 'pr_date'
+        Title: 'Date'
+        Type: 'datetime'
+        Sub Type: 'date'
+        Format: 'YYYY-MM-DD'
+      -
+        Name: 'age_group'
+        Title: 'Age group'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'count_of_case'
+        Title: 'Count of case'
+        Type: 'numeric'
+        Sub Type: 'general'
+        Unit Of Measure: 'No. of cases'
+  -
+    Identifier: 'd018fb64-f5b9-47fa-a177-31d0fe8b42cc'
+    Title: 'Cases in ICU or requires oxygen supplement'
+    Url: 'https://storage.data.gov.sg/covid-19-case-numbers/resources/cases-in-icu-or-requires-oxygen-supplement-2021-10-08T16-01-29Z.csv'
+    Format: 'CSV'
+    Coverage: '2021-09-11 to 2021-10-08'
+    Last Updated: '2021-10-08T16:01:29.214959'
+    Schema:
+      -
+        Name: 'as_of_date'
+        Title: 'Date'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'clinical_status'
+        Title: 'Clinical status'
+        Type: 'text'
+        Sub Type: 'general'
+      -
+        Name: 'count_of_case'
+        Title: 'No. of case'
+        Type: 'numeric'
+        Sub Type: 'general'
+        Unit Of Measure: 'Number'

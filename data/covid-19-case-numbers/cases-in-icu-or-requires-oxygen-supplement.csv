@@ -1,0 +1,57 @@
+as_of_date,clinical_status,count_of_case
+11/9/21,In Intensive Care Unit,7
+11/9/21,Requires Oxygen Supplementation,35
+12/9/21,In Intensive Care Unit,7
+12/9/21,Requires Oxygen Supplementation,54
+13/9/21,In Intensive Care Unit,8
+13/9/21,Requires Oxygen Supplementation,57
+14/9/21,In Intensive Care Unit,9
+14/9/21,Requires Oxygen Supplementation,75
+15/9/21,In Intensive Care Unit,9
+15/9/21,Requires Oxygen Supplementation,76
+16/9/21,In Intensive Care Unit,12
+16/9/21,Requires Oxygen Supplementation,77
+17/9/21,In Intensive Care Unit,14
+17/9/21,Requires Oxygen Supplementation,90
+18/9/21,In Intensive Care Unit,18
+18/9/21,Requires Oxygen Supplementation,105
+19/9/21,In Intensive Care Unit,21
+19/9/21,Requires Oxygen Supplementation,118
+20/9/21,In Intensive Care Unit,18
+20/9/21,Requires Oxygen Supplementation,128
+21/9/21,In Intensive Care Unit,17
+21/9/21,Requires Oxygen Supplementation,147
+22/9/21,In Intensive Care Unit,19
+22/9/21,Requires Oxygen Supplementation,145
+23/9/21,In Intensive Care Unit,23
+23/9/21,Requires Oxygen Supplementation,163
+24/9/21,In Intensive Care Unit,23
+24/9/21,Requires Oxygen Supplementation,162
+25/9/21,In Intensive Care Unit,27
+25/9/21,Requires Oxygen Supplementation,165
+26/9/21,In Intensive Care Unit,30
+26/9/21,Requires Oxygen Supplementation,172
+27/9/21,In Intensive Care Unit,27
+27/9/21,Requires Oxygen Supplementation,194
+28/9/21,In Intensive Care Unit,30
+28/9/21,Requires Oxygen Supplementation,209
+29/9/21,In Intensive Care Unit,34
+29/9/21,Requires Oxygen Supplementation,197
+30/9/21,In Intensive Care Unit,34
+30/9/21,Requires Oxygen Supplementation,204
+1/10/21,In Intensive Care Unit,34
+1/10/21,Requires Oxygen Supplementation,222
+2/10/21,In Intensive Care Unit,31
+2/10/21,Requires Oxygen Supplementation,243
+3/10/21,In Intensive Care Unit,34
+3/10/21,Requires Oxygen Supplementation,250
+4/10/21,In Intensive Care Unit,35
+4/10/21,Requires Oxygen Supplementation,226
+5/10/21,In Intensive Care Unit,34
+5/10/21,Requires Oxygen Supplementation,247
+6/10/21,In Intensive Care Unit,37
+6/10/21,Requires Oxygen Supplementation,255
+7/10/21,In Intensive Care Unit,40
+7/10/21,Requires Oxygen Supplementation,297
+8/10/21,In Intensive Care Unit,41
+8/10/21,Requires Oxygen Supplementation,307
